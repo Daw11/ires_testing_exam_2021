@@ -21,8 +21,12 @@ public class Amount {
 	public String sum(List<String> prices) {
 		this.amount = prices.stream().mapToDouble(Double::parseDouble)
 				.mapToObj(price -> Money.of(price, currencyUnit)).reduce(amount, Money::add);
+		return getAmount(); // Replace with function
+	}
+
+	// Add getter methods to check the number amount
+	public String getAmount() {
 		NumberFormat numberFormatter = new DecimalFormat("#0.00");
 		return numberFormatter.format(this.amount.getNumber());
 	}
-
 }
