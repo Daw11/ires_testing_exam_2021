@@ -38,7 +38,7 @@ public class PaymentSessionService implements IPaymentSessionService {
 		paySession.setStatus(CREATED);
 		List<Item> lineItems = request.getSaleItems().stream()
 				.map((saleItem) ->  entityBuilder.mapSaleItemToItem(saleItem, paySession.getUuid()))
-				.collect(Collectors.toList());;
+				.collect(Collectors.toList());
 		paySession.setItems(lineItems);
 		paySession.setItemAmount(calculateItemAmount(paySession));
 		paySession.setPaySessionAmount(calculateTotalAmount(paySession));
@@ -63,7 +63,7 @@ public class PaymentSessionService implements IPaymentSessionService {
 	@Override
 	public PaySession getShoppingCart(String paySessionId) throws PaySessionException {
 		Optional<PaySession> paySessionFound = paySessionRepository.findById(UUID.fromString(paySessionId));
-		if (!paySessionFound.isPresent()) {
+		if (paySessionFound.isPresent()) { // The paySession wasn't returning when it was present
 			return paySessionFound.get();
 		} else {
 			throw new PaySessionException(String.format("Pay-session id %s does not exist", paySessionId));
