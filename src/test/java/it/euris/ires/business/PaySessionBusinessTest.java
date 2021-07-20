@@ -65,9 +65,10 @@ class PaySessionBusinessTest {
     @Test
     void GivenPaySessionIdWhenGetPaySessionThenShouldCheckTtlExpired() throws PaySessionException {
         String uuid = "1";
+        Mockito.when(paymentSessionServiceMock.getShoppingCart(uuid)).thenReturn(paySessionMock);
 
-        PaySession paySession = paySessionBusiness.getPaySession( uuid );
+        paySessionBusiness.getPaySession(uuid);
 
-        Mockito.verify(paymentSessionServiceMock, times(1)).checkTtlExpired(any());
+        Mockito.verify(paymentSessionServiceMock, times(1)).checkTtlExpired(paySessionMock);
     }
 }
