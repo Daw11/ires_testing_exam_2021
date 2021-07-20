@@ -36,7 +36,7 @@ class PaySessionBusinessTest {
     }
 
     @Test
-    void GivenValidRequestWhenCreatePaySessionThenShouldReturnValidResponse() throws PaySessionException {
+    void givenValidRequestWhenCreatePaySessionThenShouldReturnValidResponse() throws PaySessionException {
         CreatePaySessionRequest request = new CreatePaySessionRequest();
         PaySessionStatus status = PaySessionStatus.PAID;
         Mockito.when(paySessionMock.getStatus()).thenReturn(status);
@@ -53,7 +53,7 @@ class PaySessionBusinessTest {
     }
 
     @Test
-    void GivenWrongRequestWhenCreatePaySessionThenShouldReturnBadResponse() throws PaySessionException {
+    void givenWrongRequestWhenCreatePaySessionThenShouldReturnBadResponse() throws PaySessionException {
         CreatePaySessionRequest request = new CreatePaySessionRequest();
         Mockito.when(paymentSessionServiceMock.createWebPaySession(any())).thenThrow(PaySessionException.class);
 
@@ -63,7 +63,7 @@ class PaySessionBusinessTest {
     }
 
     @Test
-    void GivenPaySessionIdWhenGetPaySessionThenShouldCheckTtlExpired() throws PaySessionException {
+    void givenPaySessionIdWhenGetPaySessionThenShouldCheckTtlExpired() throws PaySessionException {
         String uuid = UUID.randomUUID().toString();
         Mockito.when(paymentSessionServiceMock.getShoppingCart(uuid)).thenReturn(paySessionMock);
 

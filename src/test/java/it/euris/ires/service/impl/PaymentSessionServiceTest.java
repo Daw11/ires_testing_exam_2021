@@ -44,7 +44,7 @@ class PaymentSessionServiceTest {
     }
 
     @Test
-    void GivenValidRequestWhenCreateWebPaySessionThenShouldReturnPaySession() throws PaySessionException {
+    void givenValidRequestWhenCreateWebPaySessionThenShouldReturnPaySession() throws PaySessionException {
         PaySession paySession = Mockito.mock(PaySession.class);
         CreatePaySessionRequest request = Mockito.mock(CreatePaySessionRequest.class);
         Mockito.when(request.getSaleItems()).thenReturn(Arrays.asList());
@@ -56,7 +56,7 @@ class PaymentSessionServiceTest {
     }
 
     @Test
-    void GivenValidPaySessionIdWhenGetShoppingCartThenShouldReturnValidPaySession() throws PaySessionException {
+    void givenValidPaySessionIdWhenGetShoppingCartThenShouldReturnValidPaySession() throws PaySessionException {
         String uuid = UUID.randomUUID().toString();
         PaySession paySession = new PaySession();
         Optional<PaySession> paySessionOptional = Optional.of(paySession);
@@ -68,7 +68,7 @@ class PaymentSessionServiceTest {
     }
 
     @Test
-    void GivenWrongPaySessionIdWhenGetShoppingCartThenShouldThrowPaySessionException() {
+    void givenWrongPaySessionIdWhenGetShoppingCartThenShouldThrowPaySessionException() {
         String uuid = UUID.randomUUID().toString();
         Optional<PaySession> paySessionOptional = Optional.empty();
         Mockito.when(paySessionRepositoryMock.findById(any())).thenReturn(paySessionOptional);
@@ -77,7 +77,7 @@ class PaymentSessionServiceTest {
     }
 
     @Test
-    void GivenExpiredPaySessionWhenCheckTtlExpiredThenExpire() throws PaySessionException {
+    void givenExpiredPaySessionWhenCheckTtlExpiredThenExpire() throws PaySessionException {
         PaySession paySession = Mockito.mock(PaySession.class);
         Mockito.when(paySession.getStatus()).thenReturn(PaySessionStatus.CREATED);
         Mockito.when(paySession.getSessionTimeToLive()).thenReturn(0);
